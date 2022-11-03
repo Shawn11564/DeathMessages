@@ -1,0 +1,8 @@
+name: DeathMessages
+version: '${project.version}'
+main: dev.mrshawn.deathmessages.DeathMessages
+api-version: 1.19
+prefix: DeathMessages
+authors: [ MrShawn ]
+description: Create custom death messages on your server
+website: https://mrshawn.dev/

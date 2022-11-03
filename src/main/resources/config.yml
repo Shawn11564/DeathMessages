@@ -1,0 +1,3 @@
+gangs:
+  # How many mobs must have attacked a player to be considered a gang?
+  size: 2
