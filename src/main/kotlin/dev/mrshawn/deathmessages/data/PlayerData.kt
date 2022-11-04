@@ -69,6 +69,11 @@ class PlayerData(
 			message = Chat.colorize(message)
 		}
 
+		if (message == null && Config.getBoolean(Config.CValues.USE_DEFAULT)!!) {
+			message = Chat.colorize(Messages.getString("default")
+							?.replace("%player%", player.name))
+		}
+
 		return message
 	}
 

@@ -1,3 +1,6 @@
 gangs:
   # How many mobs must have attacked a player to be considered a gang?
   size: 2
+messages:
+  # Should the default message in messages.yml be sent if we can't figure out a death reason?
+  use-default: true

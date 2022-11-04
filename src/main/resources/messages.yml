@@ -1,3 +1,4 @@
+default: "%player% died of unknown causes."
 natural:
   contact: "%player% was beat up by a %block%"
   entity_sweep_attack: "%player% was swept off their feet"
