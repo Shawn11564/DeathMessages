@@ -1,6 +1,7 @@
-default: "%player% died of unknown causes."
+default: "%player% died of unknown causes"
 natural:
-  contact: "%player% was beat up by a %block%"
+  player: "%player% was killed by %killer%"
+  contact: "%player% was prickled by a %block%"
   entity_sweep_attack: "%player% was swept off their feet"
   projectile: "%player% was shot by a %projectile%"
   suffocation: "%player% was squished"

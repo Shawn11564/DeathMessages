@@ -5,6 +5,7 @@ import dev.mrshawn.deathmessages.files.Config
 import dev.mrshawn.deathmessages.files.Messages
 import dev.mrshawn.mlib.chat.Chat
 import org.bukkit.entity.Entity
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.FallingBlock
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -48,7 +49,7 @@ class PlayerData(
 		 * Get the proper death message
 		 */
 		if (lastDamageCause != null) {
-			message = if (lastDamageCause == DamageCause.ENTITY_ATTACK) {
+			message = if (lastDamageCause == DamageCause.ENTITY_ATTACK && lastDamager?.type != EntityType.PLAYER) {
 				Messages.getString("mobs." +
 						"${lastDamager!!.type.name.lowercase()}." +
 						if (lastDamagerList.size >= Config.getInt(Config.CValues.GANGS_SIZE)!!) "gang" else "solo"
@@ -88,7 +89,11 @@ class PlayerData(
 					lastDamager?.let {
 						processedMessage = message.replace(
 							"%killer%",
-							Aliases.getString(it.type) ?: it.type.name
+							if (it.type == EntityType.PLAYER) {
+								(it as Player).name
+							} else {
+								Aliases.getString(it.type) ?: it.type.name
+							}
 						)
 					}
 				}
@@ -96,7 +101,7 @@ class PlayerData(
 					processedMessage = message.replace(
 						"%block%",
 						(player.lastDamageCause!! as EntityDamageByBlockEvent)
-							.damager?.type?.name?.lowercase() ?: "unknown"
+							.damager?.type?.name?.lowercase()?.replace("_", " ") ?: "unknown"
 					)
 				}
 				DamageCause.PROJECTILE -> {
