@@ -2,22 +2,21 @@ package dev.mrshawn.deathmessages.data
 
 import dev.mrshawn.deathmessages.files.Aliases
 import dev.mrshawn.deathmessages.files.Config
+import dev.mrshawn.deathmessages.files.Config.CValues
 import dev.mrshawn.deathmessages.files.Messages
 import dev.mrshawn.mlib.chat.Chat
-import org.bukkit.entity.Entity
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.FallingBlock
-import org.bukkit.entity.Player
+import org.bukkit.entity.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByBlockEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import java.util.*
 
 class PlayerData(
-	private val player: Player
+	val player: Player
 ) {
 
 	companion object: Listener {
@@ -25,6 +24,11 @@ class PlayerData(
 
 		fun get(player: Player): PlayerData {
 			return playerDataMap.getOrPut(player) { PlayerData(player) }
+		}
+
+		@EventHandler
+		fun onPlayerJoin(event: PlayerJoinEvent) {
+			playerDataMap[event.player] = PlayerData(event.player)
 		}
 
 		@EventHandler
@@ -52,7 +56,7 @@ class PlayerData(
 			message = if (lastDamageCause == DamageCause.ENTITY_ATTACK && lastDamager?.type != EntityType.PLAYER) {
 				Messages.getString("mobs." +
 						"${lastDamager!!.type.name.lowercase()}." +
-						if (lastDamagerList.size >= Config.getInt(Config.CValues.GANGS_SIZE)!!) "gang" else "solo"
+						if (lastDamagerList.size >= Config.getInt(CValues.GANGS_SIZE)!!) "gang" else "solo"
 				)
 			} else {
 				Messages.getString("natural.${lastDamageCause.name.lowercase()}")
@@ -70,7 +74,7 @@ class PlayerData(
 			message = Chat.colorize(message)
 		}
 
-		if (message == null && Config.getBoolean(Config.CValues.USE_DEFAULT)!!) {
+		if (message == null && Config.getBoolean(CValues.USE_DEFAULT)!!) {
 			message = Chat.colorize(Messages.getString("default")
 							?.replace("%player%", player.name))
 		}
@@ -139,6 +143,16 @@ class PlayerData(
 		}
 
 		return processedMessage
+	}
+
+	fun getMessageType(): MessageType {
+		if (lastDamager == null) return MessageType.NATURAL
+
+		return when (lastDamager!!) {
+			is Player -> MessageType.PLAYER
+			is Mob -> MessageType.MOB
+			else -> MessageType.ENTITY
+		}
 	}
 
 }

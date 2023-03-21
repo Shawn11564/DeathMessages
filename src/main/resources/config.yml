@@ -4,3 +4,20 @@ gangs:
 messages:
   # Should the default message in messages.yml be sent if we can't figure out a death reason?
   use-default: true
+
+discord:
+  enabled: true
+  messages:
+    player:
+      enabled: true
+      # Format channels as "<guild-id>:<channel-id>"
+      channels: []
+    mob:
+      enabled: true
+      channels: []
+    entity:
+      enabled: true
+      channels: []
+    natural:
+      enabled: true
+      channels: []

@@ -1,4 +1,5 @@
 default: "%player% died of unknown causes"
+
 natural:
   player: "%player% was killed by %killer%"
   contact: "%player% was prickled by a %block%"
@@ -30,7 +31,17 @@ natural:
   dryout: "%player% should've stayed in the water"
   freeze: "%player% forgot to bring a jacket"
   sonic_boom: "%player%'s eardrums exploded"
+
 mobs:
   zombie:
     solo: "%player% was eaten by a %killer%"
     gang: "%player% was eaten by a horde of %killer%s"
+
+discord:
+  author:
+    name: "%message%"
+    url: ""
+    icon-url: "https://crafatar.com/avatars/%uuid%"
+  title: "DeathMessage"
+  description: "%message%"
+  image: "https://crafatar.com/avatars/%uuid%"

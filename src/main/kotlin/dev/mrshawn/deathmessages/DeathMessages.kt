@@ -3,6 +3,7 @@ package dev.mrshawn.deathmessages
 import co.aikar.commands.PaperCommandManager
 import dev.mrshawn.deathmessages.commands.DeathMessagesCMD
 import dev.mrshawn.deathmessages.data.PlayerData
+import dev.mrshawn.deathmessages.hooks.HookManager
 import dev.mrshawn.deathmessages.listeners.EntityDamageListener
 import dev.mrshawn.deathmessages.listeners.PlayerDeathListener
 import dev.mrshawn.mlib.selections.Selection
@@ -21,6 +22,8 @@ class DeathMessages: JavaPlugin() {
 		initObjects()
 		registerListeners()
 		registerCommands()
+
+		HookManager.loadHooks()
 	}
 
 	override fun onDisable() {

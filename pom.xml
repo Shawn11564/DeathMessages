@@ -6,7 +6,7 @@
 
 	<groupId>dev.mrshawn</groupId>
 	<artifactId>DeathMessages</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.0-BETA</version>
 	<packaging>jar</packaging>
 
 	<name>DeathMessages</name>
@@ -16,7 +16,6 @@
 		<java.version>1.8</java.version>
 		<kotlin.version>1.7.20</kotlin.version>
 		<shade.version>3.3.0</shade.version>
-		<minecraft.api.version>1.17</minecraft.api.version>
 		<minecraft.version>1.19-R0.1-SNAPSHOT</minecraft.version>
 		<mlib.version>0.0.117-ALPHA</mlib.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -126,6 +125,12 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
+
+		<!-- DiscordSRV -->
+		<repository>
+			<id>Scarsz-Nexus</id>
+			<url>https://nexus.scarsz.me/content/groups/public/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -157,6 +162,14 @@
 			<artifactId>Mlib</artifactId>
 			<version>${mlib.version}</version>
 			<scope>compile</scope>
+		</dependency>
+
+		<!-- DiscordSRV -->
+		<dependency>
+			<groupId>com.discordsrv</groupId>
+			<artifactId>discordsrv</artifactId>
+			<version>1.26.0</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
